@@ -12,6 +12,7 @@ public class DragDrop : MonoBehaviour
     public const int c_max_dropzone = 6;
     // variabile per rendere invalidi i posizionamenti su se stessi
     private bool isSelfBody = false;
+    private bool isInvalidPosition = false;
 
     // Update is called once per frame
     void Update()
@@ -19,6 +20,10 @@ public class DragDrop : MonoBehaviour
         if (isDragging)
         {
             transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        }
+        if (Input.GetKey("escape"))
+        {
+            Application.Quit();
         }
     }
     
@@ -35,6 +40,9 @@ public class DragDrop : MonoBehaviour
         Debug.Log("Trigger uscito!");
         isOverDropzone = false;
         DropZone = null;
+
+        // non devo più poter rientrare in DropZone
+        isInvalidPosition = true;
     }
     /*
 
@@ -64,7 +72,7 @@ public class DragDrop : MonoBehaviour
     public void EndDrag()
     {
         isDragging = false;
-        if (isOverDropzone && !isSelfBody)
+        if (isOverDropzone && !isSelfBody && !isInvalidPosition)
         {
             if (DrawCards.n_dropzone_cards < c_max_dropzone) {
                 transform.SetParent(DropZone.transform, false);
@@ -88,6 +96,8 @@ public class DragDrop : MonoBehaviour
         {
             transform.position = startPosition;
         }
+
+        isInvalidPosition = false;
     }
 
 }

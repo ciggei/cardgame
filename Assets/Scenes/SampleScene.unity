@@ -765,7 +765,7 @@ PrefabInstance:
     - target: {fileID: 5159996990343690390, guid: 9043cfa65eb2b7d4989baf1f4cb1bfd1,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1100
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 5159996990343690390, guid: 9043cfa65eb2b7d4989baf1f4cb1bfd1,
         type: 3}
@@ -835,12 +835,8 @@ PrefabInstance:
     - target: {fileID: 6264201891966957997, guid: 9043cfa65eb2b7d4989baf1f4cb1bfd1,
         type: 3}
       propertyPath: m_Text
-      value: 'Regolamento: 6 carte in Dropzone, 5 carte massimo in mano.
-
-        Inizio
-        partita : 5 carte
-
-        Massimo carte in mano : 5'
+      value: "Regolamento: \nCarte massime in mano : 5\nCarte massime sul tavolo
+        : 6\nPremere ESC per uscire"
       objectReference: {fileID: 0}
     - target: {fileID: 6264201891966957997, guid: 9043cfa65eb2b7d4989baf1f4cb1bfd1,
         type: 3}
