@@ -9,6 +9,9 @@ public class DragDrop : MonoBehaviour
     private bool isOverDropzone = false;
     private Vector2 startPosition;
     private GameObject DropZone;
+    public const int c_max_dropzone = 6;
+    // variabile per rendere invalidi i posizionamenti su se stessi
+    private bool isSelfBody = false;
 
     // Update is called once per frame
     void Update()
@@ -24,6 +27,7 @@ public class DragDrop : MonoBehaviour
         Debug.Log("Trigger!");
         isOverDropzone = true;
         DropZone = collider.gameObject;
+        isSelfBody = false;
     }
 
     private void OnTriggerExit2D(Collider2D collider)
@@ -52,6 +56,7 @@ public class DragDrop : MonoBehaviour
     // Start is called before the first frame update
     public void StartDrag()
     {
+        isSelfBody = true;
         startPosition = transform.position;
         isDragging = true;
     }
@@ -59,9 +64,25 @@ public class DragDrop : MonoBehaviour
     public void EndDrag()
     {
         isDragging = false;
-        if (isOverDropzone)
+        if (isOverDropzone && !isSelfBody)
         {
-            transform.SetParent(DropZone.transform, false);
+            if (DrawCards.n_dropzone_cards < c_max_dropzone) {
+                transform.SetParent(DropZone.transform, false);
+
+                // decrementa
+                DrawCards.n_ally_cards = DrawCards.n_ally_cards - 1;
+                Debug.Log("Numero carte alleate : " + (DrawCards.n_ally_cards + 1));
+
+                //incrementa carte Dropzone
+                DrawCards.n_dropzone_cards = DrawCards.n_dropzone_cards + 1;
+                Debug.Log("Numero carte Dropzone : " + (DrawCards.n_dropzone_cards));
+            }
+            else
+            {
+                transform.position = startPosition;
+                Debug.Log("Non puoi farlo!");
+            }
+
         }
         else
         {
